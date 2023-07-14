@@ -1,0 +1,13 @@
+{
+    "not_user":"Sorry, I couldn't find you in my database",
+    "disable_notif":"You have disabled notifications",
+    "enable_notif":"You have enabled notifications",
+    "credits":"This bot was created by @dhruvareddy",
+    "cancel":"You have cancelled the current operation",
+
+    "flight_type": "Are you looking for a one-way or round-trip flight?",
+    "starting_city":"What is your starting city?",
+    "ending_city":"What is your ending city?",
+    "ticket_type": "Do you want to fly economy or business?" 
+
+}
