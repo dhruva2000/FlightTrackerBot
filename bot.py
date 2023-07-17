@@ -9,4 +9,5 @@ if sys.version_info.major < 3:
 
 importdir.do('handlers', globals())
 
+
 bot.polling()

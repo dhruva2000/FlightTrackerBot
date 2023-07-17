@@ -13,35 +13,46 @@ BOT_TOKEN = os.environ['BOT_TOKEN']
 API_KEY = os.environ['API_KEY']
 client = pymongo.MongoClient(os.environ['MONGODB_URI'])
 bot = telebot.TeleBot(BOT_TOKEN)
-userStep = {}
+userStep = {} # track the current step of the user
+
 with open("response.json", encoding='utf-8') as r:
-    responses = json.load(r, object_pairs_hook=OrderedDict)
-db = client.flight_tracker
+    responses = json.load(r, object_pairs_hook=OrderedDict) # load responses
+
+db = client.flight_tracker # initalize database
+
+
+# --------------------------------- Keyboards -------------------------------- #
+
+menu_options = [
+    {'id': 1, 'name': 'New Flight'},
+    {'id': 2, 'name': 'Track Flights'},
+    {'id': 3, 'name': 'Settings'},
+]
+
+ticket_options = [
+    {'id': 4, 'name': 'Economy'},
+    {'id': 5, 'name': 'Business'},
+]
+
+currencies = ['AED', 'AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AUD', 'AWG', 'AZN', 'BAM', 'BBD', 'BDT', 
+'BGN', 'BHD', 'BIF', 'BMD', 'BND', 'BOB', 'BRL', 'BSD', 'BTC', 'BTN', 'BWP', 'BYN', 'BZD', 
+'CAD', 'CDF', 'CHF', 'CLF', 'CLP', 'CNY', 'COP', 'CRC', 'CUC', 'CUP', 'CVE', 'CZK', 'DJF', 
+'DKK', 'DOP', 'DZD', 'EEK', 'EGP', 'ERN', 'ETB', 'EUR', 'FJD', 'FKP', 'GBP', 'GEL', 'GGP', 
+'GHS', 'GIP', 'GMD', 'GNF', 'GTQ', 'GYD', 'HKD', 'HNL', 'HRK', 'HTG', 'HUF', 'IDR', 'ILS', 
+'IMP', 'INR', 'IQD', 'IRR', 'ISK', 'JEP', 'JMD', 'JOD', 'JPY', 'KES', 'KGS', 'KHR', 'KMF', 
+'KPW', 'KRW', 'KWD', 'KYD', 'KZT', 'LAK', 'LBP', 'LKR', 'LRD', 'LSL', 'LTL', 'LVL', 'LYD', 
+'MAD', 'MDL', 'MGA', 'MKD', 'MMK', 'MNT', 'MOP', 'MRO', 'MTL', 'MUR', 'MVR', 'MWK', 'MXN', 
+'MYR', 'MZN', 'NAD', 'NGN', 'NIO', 'NOK', 'NPR', 'NZD', 'OMR', 'PAB', 'PEN', 'PGK', 'PHP', 
+'PKR', 'PLN', 'PYG', 'QAR', 'QUN', 'RON', 'RSD', 'RUB', 'RWF', 'SAR', 'SBD', 'SCR', 'SDG', 
+'SEK', 'SGD', 'SHP', 'SLL', 'SOS', 'SRD', 'STD', 'SVC', 'SYP', 'SZL', 'THB', 'TJS', 'TMT', 
+'TND', 'TOP', 'TRY', 'TTD', 'TWD', 'TZS', 'UAH', 'UGX', 'USD', 'UYU', 'UZS', 'VEF', 'VND', 
+'VUV', 'WST', 'XAF', 'XCD', 'XOF', 'XPF', 'YER', 'ZAR', 'ZMK', 'ZMW', 'ZWL']
+
 # --------------------------------- Functions -------------------------------- #
 def is_user(cid):
     return db.users.find_one(str(cid)) is not None and db.users.find_one(str(cid))['active'] == True
 
-def next_step_handler(uid):
-    if uid not in userStep:
-        userStep[uid] = 0
-    return userStep[uid]
-
-@bot.message_handler(commands=["start"])
-def start(m):
-    cid = m.chat.id
-    if not is_user(cid):
-        currUser = {
-            "_id": str(cid),
-            "active": True,
-            "fname": m.chat.first_name,
-            "lname": m.chat.last_name,
-            "notifications": False,
-            "tracking":{},
-        }
-        db.users.insert_one(currUser)
-    currUser = db.users.find_one(str(cid))
-    bot.send_message(
-        cid,
-        (f"Hello! {currUser['fname']} {currUser['lname']}, I'm a bot programmed" 
-       " to find you the best tickets home. To get started click on the following 👇")
-    )
+def next_step_handler(cid):
+    if cid not in userStep:
+        userStep[cid] = 0
+    return userStep[cid]

@@ -1,5 +1,6 @@
 {
     "not_user":"Sorry, I couldn't find you in my database",
+    "no_flights": "You currently aren't tracking any flights",
     "disable_notif":"You have disabled notifications",
     "enable_notif":"You have enabled notifications",
     "credits":"This bot was created by @dhruvareddy",
