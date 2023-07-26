@@ -1,14 +1,18 @@
 {
-    "not_user":"Sorry, I couldn't find you in my database",
-    "no_flights": "You currently aren't tracking any flights",
-    "disable_notif":"You have disabled notifications",
-    "enable_notif":"You have enabled notifications",
-    "credits":"This bot was created by @dhruvareddy",
-    "cancel":"You have cancelled the current operation",
+  "not_user": "Sorry, I couldn't find you in my database",
+  "no_flights": "You currently aren't tracking any flights",
+  "disable_notif": "You have disabled notifications",
+  "enable_notif": "You have enabled notifications",
+  "credits": "This bot was created by @dhruvareddy to help him and his friends find cheap flights back home. If you find this useful, you can support him by simply booking your next flight through the bot!",
 
-    "flight_type": "Are you looking for a one-way or round-trip flight?",
-    "starting_city":"What is your starting city?",
-    "ending_city":"What is your ending city?",
-    "ticket_type": "Do you want to fly economy or business?" 
-
+  "ticket_type": "Do you want to fly economy or business?",
+  "flight_type": "Are you looking for a one-way or round-trip flight?",
+  "depart_from": "Provide a start date for your departure window. If you plan on leaving on a specific date, put the same date after this _(dd/mm/yyyy)_.",
+  "depart_to": "Provide an end date for your departure window. If you plan on leaving on a specific date, put the same date as before _(dd/mm/yyyy)_.",
+  "return_from": "Provide a start date for your return window. If you plan on leaving on a specific date, put the same date in the message after this _(dd/mm/yyyy)_.",
+  "return_to": "Provide an end date for your return window. If you plan on leaving on a specific date, put the same date as before _(dd/mm/yyyy)_.",
+  "starting_city": "What is your starting city?",
+  "pick_start": "Specify the city or airport from the list below so we can help you narrow your search!",
+  "ending_city": "What is your ending city?",
+  "pick_end": "Specify the city or airport from the list below so we can help you narrow your search!"
 }

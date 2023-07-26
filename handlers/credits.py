@@ -1,6 +1,5 @@
 from config import *
 
-
 @bot.message_handler(func=lambda m: m.content_type == "text" and m.text == "CREDITS")
 @bot.message_handler(commands=["credits"])
 def credits_command(m):

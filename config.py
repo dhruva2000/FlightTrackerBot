@@ -13,6 +13,7 @@ client = pymongo.MongoClient(os.environ['MONGODB_URI'])
 # bot = telebot.TeleBot(BOT_TOKEN)
 bot = AsyncTeleBot(BOT_TOKEN)
 userStep = {} # track the current step of the user
+currUser = ""
 
 with open("response.json", encoding='utf-8') as r:
     responses = json.load(r, object_pairs_hook=OrderedDict) # load responses
@@ -31,6 +32,13 @@ menu_options = [
 ticket_options = [
     {'id': 4, 'name': 'Economy'},
     {'id': 5, 'name': 'Business'},
+    {'id': 0, 'name': 'Menu ☰'}
+]
+
+flight_type_options = [
+    {'id': 6, 'name': 'One-way'},
+    {'id': 7, 'name': 'Round-trip'},
+    {'id': 0, 'name': 'Menu ☰'}
 ]
 
 currencies = [
