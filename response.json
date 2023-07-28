@@ -1,6 +1,7 @@
 {
   "not_user": "Sorry, I couldn't find you in my database",
   "no_flights": "You currently aren't tracking any flights",
+  "invalid_date": "I'm sorry I couldn't recognize that. Your response should be a valid date that is not before today in dd-mm-yyyy format.",
   "disable_notif": "You have disabled notifications",
   "enable_notif": "You have enabled notifications",
   "credits": "This bot was created by @dhruvareddy to help him and his friends find cheap flights back home. If you find this useful, you can support him by simply booking your next flight through the bot!",

@@ -27,7 +27,21 @@ async def start_currency_handler(m):
             "search_params": {"fly_from": None, "fly_to": None, "date_from": None, "date_to": None, "return_from": None, "return_to": None, "price_to": None, "max_stopovers": None, "sort": None},
             "tracking":{},
         }
+        currParams = {
+            "_id": str(cid),
+            "ticket_type": None,
+            "fly_from": None,
+            "fly_to": None,
+            "date_from": None,
+            "date_to": None,
+            "return_from": None,
+            "return_to": None,
+            "price_to": None,
+            "max_stopovers": None,
+            "sort": None,
+        }
         db.users.insert_one(currUser)
+        db.search_params.insert_one(currParams)
         userStep[cid] = 'currency'
     currUser = db.users.find_one(str(cid))
     await bot.send_message(cid,
@@ -38,7 +52,7 @@ async def start_currency_handler(m):
     )
 # We run this function if the user is already in our database
 @bot.message_handler(commands=["start"], func=lambda msg: is_user(msg.chat.id))
-@bot.message_handler(func=lambda msg: next_step_handler(msg.chat.id) == 'menu' or next_step_handler(msg.chat.id) == 'currency')
+# @bot.message_handler(func=lambda msg: next_step_handler(msg.chat.id) == 'menu' or next_step_handler(msg.chat.id) == 'currency')
 async def start_is_user(m):
     # print(f"reached start_is_user and next_step is {next_step_handler(m.chat.id)}")
     cid = m.chat.id
@@ -46,9 +60,11 @@ async def start_is_user(m):
         await remove_reply_keyboard(cid, "removing keyboard... ")
         db.users.update_one({"_id": str(cid)}, {"$set": {"currency": m.text}})
         userStep[cid] = 'menu'
-        print(f"reached line 49 and next_step is {next_step_handler(m.chat.id)}")
+        print(f"reached line 63 and next_step is {next_step_handler(m.chat.id)}")
     if next_step_handler(cid) == 'menu' or next_step_handler(cid) == 0:
         currUser = db.users.find_one(str(cid))
+        userStep[cid] = 'menu'
+        print(f"reached line 67 and next_step is {next_step_handler(m.chat.id)}")
         await bot.send_chat_action(cid, "typing")
         await bot.send_message(
             cid,

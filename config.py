@@ -84,6 +84,7 @@ def inline_generator(options):
             curr += 1
         keyboard.append(temp)
         temp = []
+    # print(keyboard)
     return types.InlineKeyboardMarkup(keyboard=keyboard)
 
 async def remove_reply_keyboard(cid, text):
